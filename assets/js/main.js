@@ -1,6 +1,7 @@
 $(document).ready(function(){
   var $btn = $('#submit');
   var $campo = $('.form-control');
+  var insEmail = $('#insEmail').val();
   var insPassword = $('#insPassword').val();
   var confPassword;
   $('#well-done').hide();
@@ -47,9 +48,9 @@ $(document).ready(function(){
 
   
   var well = false; //Imposto well su false in modo che di default ferma il processo.
-  console.log('well '+ well);
+  console.log('well= '+ well);
   $btn.on('click', function(){
-
+insEmail = $('#insEmail').val();
     $campo.each(function(){
       //Controlla che i campi non siano vuoti
       var value = $(this).val();
@@ -68,7 +69,14 @@ $(document).ready(function(){
       // console.log('well done')
       well = true; 
     }
-    
+
+    if(!IsEmail(insEmail)){
+      //Se l'email deve rispettare i seguenti parametri lettere miuscole e minuscole, numeri e caratteri speciali.
+      $('.validation2').show(500);
+      well = true;
+      return true;
+    }
+
     if(!IsPass(insPassword)){
       //Se la password deve rispettare i seguenti parametri lettere miuscole e minuscole, numeri e caratteri speciali.
       $('.validation2').show(500);
@@ -93,9 +101,9 @@ $(document).ready(function(){
 
 function IsEmail(email) {
   var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;    
-  console.log(!(regex.test(email)));
+  var a = regex.test(email);
+  // console.log(a);                                                              // convalida email
   if(!regex.test(email)) {
-    console.log('Funzione '+ email);
     return false;
   }else{
     return true;
