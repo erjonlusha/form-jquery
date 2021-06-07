@@ -1,7 +1,10 @@
 $(document).ready(function(){
   var $btn = $('#submit');
   var $campo = $('.form-control');
-    $('#well-done').hide();
+  var insPassword = $('#insPassword').val();
+  var confPassword;
+  $('#well-done').hide();
+
   //Controllo che carattere @ si presente nell'email 
   $('#insEmail').focusout(function(){
     var insEmail = $('#insEmail').val(); 
@@ -9,7 +12,7 @@ $(document).ready(function(){
 
     if(insEmail.search('@') < 0){
       console.log(insEmail.search('@') + ' For')
-      $('#invalid_email').show(500).addClass('error');
+      $('#invalid_email').show(500);
       $(this).addClass('error');
       $(this).parent().find('.validation').show(500);
     }else{
@@ -20,39 +23,35 @@ $(document).ready(function(){
   });
 
   $('#insPassword').focusout(function(){
-    var insPassword = $('#insPassword').val();
-    
+    // Quando si passa all'input successivo la funzione controlla che la lunghezza della password sia di almeno 12 caratteri.
     if($(this).val().length < 12){                                          // 1. Lunghezza minima 12. 
-      $('#val_lenght').show(500).addClass('error');
+      $('#val_lenght').show(500);
       $(this).addClass('error');
       $(this).parent().find('.validation').show(500)
     }else{
-      $('#val_lenght').hide(500).removeClass('error');
+      $('#val_lenght').hide(500).removeClass('error2');
       $(this).parent().find('.validation').hide(500);
     }
-    
-    if(IsEmail(insPassword)){
-      $(this).show(500).addClass('error');
-      return false;
-    }
-
-    
+        
   });
   
-  $('#confPassword').focusout(function(){                                   // Confronta password
+  $('#confPassword').focusout(function(){                                   
+    // Confronta il primo input con il secondo nel caso fossero diversi da errore:
     insPassword = $('#insPassword').val(); 
-    var confPassword = $('#confPassword').val();
-
+    confPassword = $('#confPassword').val();
     if(insPassword != confPassword){
       $(this).addClass('error');
-      $(this).parent().find('.validation').show(500);
+      $(this).parent().find('.validationP').show(500);
     }
-    
   });
 
-  var well;
+  
+  var well = false; //Imposto well su false in modo che di default ferma il processo.
+  console.log('well '+ well);
   $btn.on('click', function(){
+
     $campo.each(function(){
+      //Controlla che i campi non siano vuoti
       var value = $(this).val();
       if (value == '') {
         $(this).addClass('error');
@@ -62,24 +61,31 @@ $(document).ready(function(){
         $(this).parent().find('.validation').hide(500);
       }
     });
-    
-    if(IsPass(insPassword)){
-      $('#invalid_email').show(500).addClass('error');
-      return true;
+
+    var errorCount = $('.error').length;
+    // Controllo che non ci siano errori
+    if (errorCount == 0) {
+      // console.log('well done')
+      well = true; 
     }
     
-    var errorCount = $('.error').length;
-    if (errorCount == 0) {
-      console.log('well done')
+    if(!IsPass(insPassword)){
+      //Se la password deve rispettare i seguenti parametri lettere miuscole e minuscole, numeri e caratteri speciali.
+      $('.validation2').show(500);
       well = true;
+      return true;
+    }
+
+    if (insPassword !== confPassword) {
+      // se le due password non sono identiche mostra l'errore
+      $('.validation2').show(500);
+      well = false;
+      return false;
     }
 
     if(well) {
-      console.log('well '+ well);
       $('.form').fadeOut(40);
       $('#well-done').show(800);
-    } else {
-
     }
   });
   
@@ -96,14 +102,13 @@ function IsEmail(email) {
   }
 }
 
-
-function IsPass(password) {
-  var passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;       //2. Una lettera maiuscola.
-  console.log((passRegex.test(password)));                                       //3. Un numero.
-  if(passRegex.test(password)) {                                                 //4. Un carattere speciale.
-    console.log('Funzione '+ password);
-    return true;
-  }else{
+function IsPass(password) { 
+  var passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/gm;        
+  var a = passRegex.test(password);                                               //2. Una lettera maiuscola.
+  // console.log(a);                                                              //3. Un numero.
+  if(a) {                                                                         //4. Un carattere speciale.
+    return  well = true;
+  } else {
     return false;
-  }
+  }       
 }

@@ -4,15 +4,16 @@ body {
     display: flex;
 }
 
-.form {
-    width: 300px;
-}
+input {width: 300px!important;}
 
 .form h3 {
     margin-top: 0;
     text-transform: uppercase;
 }
-
+h3{
+   color: #007bff8c !important;
+   font-size: 3rem;
+}
 .error {
     border-color: red;
     box-shadow: 0 0 6px rgba(255, 0, 0, 0.8);
@@ -20,6 +21,7 @@ body {
 
 .validation,
 .validation2,
+.validationP,
 #invalid_email,
 #val_lenght,
 #val_capital,
@@ -35,8 +37,11 @@ body {
 
 
 .form {
-    background-color: beige;
     width: fit-content;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    place-content: stretch space-evenly;
 }
 
 .password_form {
@@ -57,14 +62,17 @@ body {
     align-items: center;
     height: 60vh;
     width: 65vw;
-    border: 15px solid #1e7e34;
-    border-bottom: 50px solid #1e7e34;
-    border-radius: 15px;
+    border: 15px solid #1e7e34a8;
+    border-bottom: 150px solid #1e7e34bb;
+    border-radius: 25px;
     font-weight: 600;
     filter: drop-shadow(7px 4px 6px #083100a4);
     text-shadow: 0px 0px 10px #075f01be;
 }
-
+.form{
+    filter: drop-shadow(7px 4px 6px #ffffffe5)!important;
+    text-shadow: 0px 0px 10px #ffffffe5!important;
+}
 #well-done {
     margin: auto;
     display: flex;
@@ -80,7 +88,12 @@ body {
 h1{
     padding: 115px;
     background: white;
-    /* border-radius: 10px; */
     margin-bottom: 0;
-    color: #0062cc;
+    color: #007bff8c !important;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff8c!important;
+    border-color: #007bffed!important;
 }
