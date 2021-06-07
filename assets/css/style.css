@@ -1,0 +1,85 @@
+body {
+    font-family: 'Raleway', sans-serif;
+    height: 100vh;
+    display: flex;
+}
+
+.form {
+    width: 300px;
+}
+
+.form h3 {
+    margin-top: 0;
+    text-transform: uppercase;
+}
+
+.error {
+    border-color: red;
+    box-shadow: 0 0 6px rgba(255, 0, 0, 0.8);
+}
+
+.validation,
+.validation2,
+#invalid_email,
+#val_lenght,
+#val_capital,
+#val_number,
+#val_special {
+    color: red;
+    font-style: italic;
+    font-size: 12px;
+    display: none;
+}
+
+
+
+
+.form {
+    background-color: beige;
+    width: fit-content;
+}
+
+.password_form {
+    width: fit-content;
+
+
+}
+
+.well {
+    width: fit-content;
+    margin: auto;
+    border-radius: 20px;
+    padding: 50px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    width: 65vw;
+    border: 15px solid #1e7e34;
+    border-bottom: 50px solid #1e7e34;
+    border-radius: 15px;
+    font-weight: 600;
+    filter: drop-shadow(7px 4px 6px #083100a4);
+    text-shadow: 0px 0px 10px #075f01be;
+}
+
+#well-done {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: flex-start;
+
+
+}
+
+h1{
+    padding: 115px;
+    background: white;
+    margin-bottom: 0;
+    color: #0062cc;
+}
