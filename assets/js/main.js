@@ -22,7 +22,7 @@ $(document).ready(function(){
   $('#insPassword').focusout(function(){
     var insPassword = $('#insPassword').val();
     
-    if($(this).val().length < 12){                                          // 1. Lunghezza minima 12.
+    if($(this).val().length < 12){                                          // 1. Lunghezza minima 12. 
       $('#val_lenght').show(500).addClass('error');
       $(this).addClass('error');
       $(this).parent().find('.validation').show(500)

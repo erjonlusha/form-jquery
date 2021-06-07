@@ -80,6 +80,7 @@ body {
 h1{
     padding: 115px;
     background: white;
+    /* border-radius: 10px; */
     margin-bottom: 0;
     color: #0062cc;
 }
