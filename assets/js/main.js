@@ -8,11 +8,9 @@ $(document).ready(function(){
 
   //Controllo che carattere @ si presente nell'email 
   $('#insEmail').focusout(function(){
-    var insEmail = $('#insEmail').val(); 
-    console.log('#insEmail '+insEmail);
+    var insEmail = $('#insEmail').val();
 
-    if(insEmail.search('@') < 0){
-      console.log(insEmail.search('@') + ' For')
+    if(!IsEmail(insEmail)){
       $('#invalid_email').show(500);
       $(this).addClass('error');
       $(this).parent().find('.validation').show(500);
@@ -25,12 +23,12 @@ $(document).ready(function(){
 
   $('#insPassword').focusout(function(){
     // Quando si passa all'input successivo la funzione controlla che la lunghezza della password sia di almeno 12 caratteri.
-    if($(this).val().length < 12){                                          // 1. Lunghezza minima 12. 
+    if(!IsPass){                                                          // 1. Lunghezza minima 12. 
       $('#val_lenght').show(500);
       $(this).addClass('error');
       $(this).parent().find('.validation').show(500)
     }else{
-      $('#val_lenght').hide(500).removeClass('error2');
+      $('#val_lenght').hide(500).removeClass('error');
       $(this).parent().find('.validation').hide(500);
     }
         
@@ -48,7 +46,6 @@ $(document).ready(function(){
 
   
   var well = false; //Imposto well su false in modo che di default ferma il processo.
-  console.log('well= '+ well);
   $btn.on('click', function(){
 insEmail = $('#insEmail').val();
     $campo.each(function(){
@@ -66,7 +63,6 @@ insEmail = $('#insEmail').val();
     var errorCount = $('.error').length;
     // Controllo che non ci siano errori
     if (errorCount == 0) {
-      // console.log('well done')
       well = true; 
     }
 
@@ -100,9 +96,7 @@ insEmail = $('#insEmail').val();
 });
 
 function IsEmail(email) {
-  var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;    
-  var a = regex.test(email);
-  // console.log(a);                                                              // convalida email
+  var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;     // convalida email
   if(!regex.test(email)) {
     return false;
   }else{
@@ -111,7 +105,7 @@ function IsEmail(email) {
 }
 
 function IsPass(password) { 
-  var passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/gm;        
+  var passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{12,})/gm;        
   var a = passRegex.test(password);                                               //2. Una lettera maiuscola.
   // console.log(a);                                                              //3. Un numero.
   if(a) {                                                                         //4. Un carattere speciale.
